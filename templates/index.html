@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IITM BS Degree CGPA Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header Section -->
+    <div class="bg-blue-900 p-5 text-white">
+        <div class="max-w-6xl mx-auto flex items-center">
+            <img src="/static/iitm_logo.png" alt="IITM Logo" class="h-12 mr-4">
+            <h1 class="text-xl font-bold">Indian Institute of Technology Madras</h1>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">IITM BS Degree CGPA Calculator</h1>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="mb-4">
+            {% for category, message in messages %}
+            <div class="p-2 rounded mb-2 
+                {% if category == 'success' %} bg-green-100 text-green-700 
+                {% elif category == 'info' %} bg-blue-100 text-blue-700 
+                {% elif category == 'error' %} bg-red-100 text-red-700 
+                {% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+
+        <!-- Form -->
+        <form action="/calculate" method="POST">
+            <div class="mb-6">
+                <!-- Foundation Subjects -->
+                <h2 class="text-xl font-bold text-blue-800 border-b-2 border-blue-600 mb-4">Foundation</h2>
+                {% for subject in subjects %}
+                    {% if subject.category == "Foundation" %}
+                    <div class="flex items-center mb-3">
+                        <!-- Checkbox -->
+                        <input type="checkbox" name="subject" value="{{ subject.name }}" id="{{ subject.name }}"
+                            class="mr-3 accent-blue-600">
+                        <!-- Subject Name -->
+                        <label for="{{ subject.name }}" class="flex-1 text-gray-700">{{ subject.name }} ({{ subject.credits }} Credits)</label>
+                        <!-- Grade Dropdown -->
+                        <select name="grade" class="p-2 border rounded focus:outline-blue-500">
+                            <option value="">Select Grade</option>
+                            <option value="S">S</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            
+                <!-- Diploma Subjects -->
+                <h2 class="text-xl font-bold text-blue-800 border-b-2 border-blue-600 mb-4">Diploma in Programming</h2>
+                {% for subject in subjects %}
+                    {% if subject.category == "Diploma in Prog" %}
+                    <div class="flex items-center mb-3">
+                        <!-- Checkbox -->
+                        <input type="checkbox" name="subject" value="{{ subject.name }}" id="{{ subject.name }}"
+                            class="mr-3 accent-blue-600">
+                        <!-- Subject Name -->
+                        <label for="{{ subject.name }}" class="flex-1 text-gray-700">{{ subject.name }} ({{ subject.credits }} Credits)</label>
+                        <!-- Grade Dropdown -->
+                        <select name="grade" class="p-2 border rounded focus:outline-blue-500">
+                            <option value="">Select Grade</option>
+                            <option value="S">S</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+                <h2 class="text-xl font-bold text-blue-800 border-b-2 border-blue-600 mb-4">Diploma in Data Science</h2>
+                {% for subject in subjects %}
+                    {% if subject.category == "Diploma in Data" %}
+                    <div class="flex items-center mb-3">
+                        <!-- Checkbox -->
+                        <input type="checkbox" name="subject" value="{{ subject.name }}" id="{{ subject.name }}"
+                            class="mr-3 accent-blue-600">
+                        <!-- Subject Name -->
+                        <label for="{{ subject.name }}" class="flex-1 text-gray-700">{{ subject.name }} ({{ subject.credits }} Credits)</label>
+                        <!-- Grade Dropdown -->
+                        <select name="grade" class="p-2 border rounded focus:outline-blue-500">
+                            <option value="">Select Grade</option>
+                            <option value="S">S</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
+                        </select>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition">
+                Calculate CGPA
+            </button>
+        </form>
+
+        <!-- Result -->
+        {% if result %}
+        <div class="mt-6 text-center bg-green-100 p-4 rounded shadow">
+        <h2 class="text-lg font-bold text-green-800">Your CGPA: {{ result }}</h2>
+            {% if result > 8.0 %}
+                <p class="text-md font-semibold text-green-700 mt-2">Congratulations! Your CGPA is outstanding!</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+    </div>
+
+
+    <div class="bg-blue-900 p-5 text-white" style="text-align: center; font-size: x-large;">
+        <h1>
+            For Bsc and BS level courses, under development process.<br>
+            Developed by M.Mahadevan
+        </h1>
+    </div>
+</body>
+<script>
+    alert("Enter the details and scroll to the page end to calculate CGPA!!")
+</script>
+</html>
