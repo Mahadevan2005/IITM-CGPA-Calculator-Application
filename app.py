@@ -37,6 +37,10 @@ SUBJECTS = [
 def home():
     return render_template("index.html", subjects=SUBJECTS)
 
+@app.route("/health")
+def health():
+    return "OK", 200
+
 @app.route("/calculate", methods=["POST"])
 def calculate():
     try:
