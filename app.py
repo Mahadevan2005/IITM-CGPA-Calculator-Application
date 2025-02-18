@@ -35,8 +35,7 @@ SUBJECTS = [
 
 @app.route("/")
 def home():
-    result = request.args.get("result", None)
-    return render_template("index.html", subjects=SUBJECTS, result=result)
+    return render_template("index.html", subjects=SUBJECTS)
 
 @app.route("/health")
 def health():
@@ -67,7 +66,7 @@ def calculate():
 
         # Calculate CGPA
         result = calculate_cgpa(filtered_grades, credits)
-        return redirect(url_for("home", result = result))
+        return render_template("index.html", subjects=SUBJECTS, result=result)
     except Exception as e:
         flash(f"Error: {e}", "error")
         return redirect(url_for("home"))
